@@ -12,7 +12,7 @@ module.exports = {
       .setColor(colorCode(msg))
       .setDescription(
         "[https://pogme.xyz/invite](https://discord.com/api/oauth2/authorize?client_id=700428283443019846&permissions=388160&redirect_uri=https%3A%2F%2Fdiscord.com%2Finvite%2FvKWe7ymUJq&scope=bot)\n" +
-          "I hope I may be essential to you or someone on your server!"
+        "I hope I may be essential to you or someone on your server!"
       );
     msg.channel.send(embed);
   },

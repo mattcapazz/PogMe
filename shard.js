@@ -9,9 +9,7 @@ const shards = new ShardingManager("./index.js", {
 
 shards.on("shardCreate", (shard) => {
   console.log(
-    `[${new Date().toString().split(" ", 5).join(" ")}] Launched shard #${
-      shard.id
-    }`
+    `[${new Date().toString().split(" ", 5).join(" ")}] Launched shard #${shard.id}`
   );
 });
 

@@ -5,7 +5,7 @@ module.exports = (client) => {
   let prefix = client.prefixes[2].replace(" ", "");
 
   let arrStatus = [
-    `${prefix}help | pogme.xyz | v0.1.1`,
+    `${prefix}help | pogme.xyz | v0.1.6`,
     `${client.cmds.size} commands & ${client.aliases.size} aliases!`,
     `${client.guilds.cache.size} servers and ${client.users.cache.size} users | "${prefix}invite"`,
   ];

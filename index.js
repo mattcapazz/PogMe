@@ -18,7 +18,6 @@ client.aliases = new Discord.Collection();
 /**
  * catg. Name,
  * .cfg File,
- * cmds Qnt.,
  * .js Cmds
  */
 (client.categories = readdirSync("./cmds/")), [], [];
