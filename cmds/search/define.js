@@ -1,4 +1,6 @@
 const axios = require("axios").default;
+const config = require("../../config.json");
+
 const { MessageEmbed } = require("discord.js");
 const { colorCode } = require("../../funcs.js");
 
@@ -13,7 +15,7 @@ module.exports = {
       url: "https://mashape-community-urban-dictionary.p.rapidapi.com/define",
       params: { term: args.join(" ") },
       headers: {
-        "x-rapidapi-key": "e3b5c8d9a9mshb833af8a48baa68p13d067jsn0523e7791612",
+        "x-rapidapi-key": config["x-rapidapi-key"],
         "x-rapidapi-host": "mashape-community-urban-dictionary.p.rapidapi.com",
       },
     };
@@ -33,8 +35,7 @@ module.exports = {
           )
           .addField(
             "Example",
-            `${word.example.replace(/[\[\]']+/g, "")}\n\n*(Defined by: **${
-              word.author
+            `${word.example.replace(/[\[\]']+/g, "")}\n\n*(Defined by: **${word.author
             }**)*`
           )
           .addField(":thumbsup: Thumbs up", word.thumbs_up, true)
