@@ -2,5 +2,6 @@
   "debugMessages": "true",
   "embedDefaultColor": "#ffd1dc",
   "getEmojisFromGuild": "715105692297723996",
-  "token": "bot-token"
+  "token": "bot-token",
+  "x-rapidapi-key": "rapidapi-key"
 }
