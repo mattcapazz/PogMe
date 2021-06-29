@@ -53,26 +53,21 @@ function getAll(client, msg, args) {
     "**Don't include the `[]`, `()` & `{}` symbols in the command!**\n\u200b";
   embed.setDescription(desc);
 
-  //embed.addField("", "\u200b");
+  let ctg = client.categories;
 
-  embed.addField(
-    ":chart_with_upwards_trend: Info. / Statistics",
-    `*Get information about users, emotes, channels etc. and live counters.*\n**2 commands**`,
-    true
-  );
-
-  embed.addField(
-    ":flashlight: Utility",
-    `*Useful leftover commands that don't fit elsewhere.*\n**2 commands**`,
-    true
-  );
+  for (let i = 0; i < client.categories.length; i++)
+    if (ctg[i][1]) {
+      ctg[i][2].length > 1
+        ? cmdQnt = "commands"
+        : cmdQnt = "command"
+      embed.addField(ctg[i][1].name, `${ctg[i][1].desc}\n**${ctg[i][2].length} ${cmdQnt}**`, true);
+    }
 
   if (args) return msg.channel.send(embed);
   if (msg.channel.type == "text")
     msgDelete(
       msg,
-      `**Gotcha** ${
-        msg.author
+      `**Gotcha** ${msg.author
       }! I've sent you a DM with my commands n' stuff. Please check your DMs! ${emoji(
         "senkoHappy"
       )}`

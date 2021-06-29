@@ -16,7 +16,6 @@ module.exports = (client) => {
     client.categories[idx] = [
       cat,
       evalFile(`./cmds/${cat}/cfg.json`),
-      dir.length,
       dir,
     ];
 

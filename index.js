@@ -21,7 +21,7 @@ client.aliases = new Discord.Collection();
  * cmds Qnt.,
  * .js Cmds
  */
-(client.categories = readdirSync("./cmds/")), [], 0, [];
+(client.categories = readdirSync("./cmds/")), [], [];
 client.cmds = new Discord.Collection();
 
 client.hex = "ABCDEF0123456789";

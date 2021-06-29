@@ -1,5 +1,5 @@
 {
-  "aliases": ["info", "infos", "information", "stat", "stats", "statistics"],
-  "name": ":chart_with_upwards_trend: Info. / Statistics",
-  "desc": "Get information about users, emotes, channels etc. and live counters."
+  "aliases": ["bday", "bdays", "birthday", "birthdays"],
+  "name": ":birthday: Birthdays",
+  "desc": "Set roles and announce birthdays on the server."
 }

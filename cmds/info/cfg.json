@@ -1,5 +1,5 @@
 {
   "aliases": ["info", "infos", "information", "stat", "stats", "statistics"],
   "name": ":chart_with_upwards_trend: Info. / Statistics",
-  "desc": "Get information about users, emotes, channels etc. and live counters."
+  "desc": "Get information about channels, emojis, users, etc. and live counters."
 }
