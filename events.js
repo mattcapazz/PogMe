@@ -1,4 +1,4 @@
-//  Load all the events, from ./events folder.
+// Load all the events, from ./events folder.
 const { readdirSync } = require("fs");
 
 module.exports = (client) => {
