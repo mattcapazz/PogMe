@@ -1,3 +1,4 @@
+const { colorCode } = require("../../funcs.js");
 const Canvas = require("canvas");
 const { MessageAttachment, MessageEmbed } = require("discord.js");
 
@@ -9,16 +10,25 @@ module.exports = {
   usage: "(#hex)",
   run: async (client, msg, args) => {
     let code = "#";
-    console.log(args);
 
-    if (args)
+    if (args[0]) {
       if (/^[0-9a-fA-F]{6}$/.test(args[0])) code += args[0];
-      else if (/^[0-9a-fA-F]{6}$/.test(args[0].substring(1))) code = args[0];
-      else
-        for (let i = 0; i < 6; i++)
-          code += client.hex.charAt(
-            Math.floor(Math.random() * client.hex.length)
-          );
+      else if (args[0].startsWith("#") && /^[0-9a-fA-F]{6}$/.test(args[0].substring(1))) code = args[0];
+      else {
+        let otherEmbed = new MessageEmbed()
+          .setColor(colorCode(msg))
+          .setDescription(`**Sorry ${msg.member.displayName}**, I couldn't figure out what colour that is.` +
+            "\nPlease try repeating the command with a ***valid #HEX***\n***colour code***.")
+          .setThumbnail("https://cdn.discordapp.com/attachments/858400861990158376/860069998571421726/senkoWorried.png")
+          .setTitle("Syntax Error");
+
+        return msg.channel.send(otherEmbed);
+      }
+    } else
+      for (let i = 0; i < 6; i++)
+        code += client.hex.charAt(
+          Math.floor(Math.random() * client.hex.length)
+        );
 
     const canvas = Canvas.createCanvas(200, 200);
     const ctx = canvas.getContext("2d");
@@ -33,6 +43,6 @@ module.exports = {
       .setImage("attachment://color.jpg")
       .setTitle(`Preview of the color ${code.toUpperCase()}`);
 
-    msg.channel.send(embed);
+    return msg.channel.send(embed);
   },
 };
