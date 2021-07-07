@@ -26,12 +26,12 @@ module.exports = {
         .setAuthor(`${user.tag}'s\nProfile Picture`, user.avatarURL())
         .setColor(colorCode(msg))
         .setDescription(
-          `**Image Links**: [**JPG**](${user.avatarURL({
+          `**Image Links**: [JPG](${user.avatarURL({
             format: "jpg",
             size: 2048,
           })}) | ` +
-            `[**PNG**](${user.avatarURL({ format: "png", size: 2048 })}) | ` +
-            `[**WEBP**](${user.avatarURL({ format: "webp", size: 2048 })})`
+            `[PNG](${user.avatarURL({ format: "png", size: 2048 })}) | ` +
+            `[WEBP](${user.avatarURL({ format: "webp", size: 2048 })})`
         )
         .setFooter(exec[0], exec[1])
         .setImage(
@@ -50,7 +50,7 @@ module.exports = {
           })
         );
         embed.setDescription(
-          `${embed.description} | [**GIF**](${user.avatarURL({
+          `${embed.description} | [GIF](${user.avatarURL({
             format: "gif",
             size: 2048,
           })})`

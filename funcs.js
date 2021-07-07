@@ -15,12 +15,10 @@ module.exports = {
     /* The server doesn't exist in the database. May be due because the bot was added to a server while offline
     Func. happens when bot enters a new server too */
     const db = require("./index").db;
-    db.get(
-      `SELECT COUNT() AS exists FROM server WHERE id = ?`,
-      id,
-      (err, row) => {
-        if (row.exists == 0) db.run(`INSERT INTO server(id) VALUES (?)`, id);
-      }
+    db.get(`SELECT COUNT() AS count FROM server WHERE id = ?`, id, (err, row) => {
+      if (row.count == 0)
+        db.run(`INSERT INTO server(id) VALUES (?)`, id);
+    }
     );
   },
 
