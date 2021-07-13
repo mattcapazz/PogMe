@@ -2,6 +2,7 @@ const config = require("./config.json");
 const { debug } = require("./funcs.js");
 const Discord = require("discord.js");
 const client = new Discord.Client();
+require("discord-buttons")(client);
 
 const sqlite3 = require("sqlite3").verbose();
 const db = new sqlite3.Database("./pogMe.db", sqlite3.OPEN_READWRITE, (err) => {

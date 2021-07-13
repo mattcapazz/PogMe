@@ -3,8 +3,8 @@ module.exports = (client) => {
   debug(`Logged in: "${client.user.tag}".`);
 
   let prefix = client.prefixes[2].replace(" ", ""), arrStatus = [
-    `${prefix}help | pogme.xyz | v0.1.9`,
-    `${client.cmds.size} commands & ${client.aliases.size} aliases!`,
+    `${prefix}help | pogme.xyz | v0.2.4`,
+    `${client.cmds.size - 6} commands & ${client.aliases.size} aliases!`,
     `${client.guilds.cache.size} servers and ${client.users.cache.size} users | "${prefix}invite"`,
   ], i = 1;
 

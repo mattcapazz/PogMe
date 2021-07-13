@@ -11,6 +11,6 @@ module.exports = {
 
       db.run(`UPDATE server SET wm = ? WHERE id = ?`, args.join(' '), id);
       return msg.react("<:dbCheck:862198124348047370>");
-    } else return msg.channel.send("No permissions. :x:")
+    } else return msg.channel.send("No permissions. :x:");
   },
 };

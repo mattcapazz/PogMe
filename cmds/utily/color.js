@@ -4,7 +4,7 @@ const { MessageAttachment, MessageEmbed } = require("discord.js");
 
 module.exports = {
   aliases: ["colour"],
-  description:
+  desc:
     "I'll show a preview of the colour if supplied. Otherwise, I'll show you a random one, useful to check out colours for your embeds.",
   name: "color",
   usage: "(#hex)",

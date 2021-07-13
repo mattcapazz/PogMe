@@ -6,7 +6,7 @@ const { colorCode } = require("../../funcs.js");
 
 module.exports = {
   aliases: ["meaning", "urban"],
-  description: "Look for an accurate definition of a term on UrbanDictionary.",
+  desc: "Look for an accurate definition of a term on UrbanDictionary.",
   name: "define",
   usage: "[term]",
   run: async (client, msg, args) => {

@@ -1,7 +1,8 @@
 module.exports = async (client, msg) => {
   if (msg.author.bot) return;
   let prefixes = client.prefixes;
-  //msg.content = msg.content.toLowerCase();
+  msg.content = msg.content.charAt(0).toLowerCase() + msg.content.slice(1);
+  //console.log(msg);
 
   for (var i = 0; i < prefixes.length; i++) {
     if (msg.content.startsWith(prefixes[i])) {

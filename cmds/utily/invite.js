@@ -3,7 +3,7 @@ const { colorCode } = require("../../funcs.js");
 
 module.exports = {
   aliases: ["botinvite"],
-  description:
+  desc:
     "Get my invite link so you can add me to other servers or tell your friends about me!",
   name: "invite",
   run: async (client, msg) => {

@@ -13,8 +13,7 @@ module.exports = {
     "pung",
     "🏓",
   ],
-  category: "statistics",
-  description:
+  desc:
     "Check my ping to see if there's an issue on how long I'm taking to reply.",
   name: "ping",
   run: async (client, msg) => {
