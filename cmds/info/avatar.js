@@ -1,7 +1,6 @@
 const { MessageEmbed } = require("discord.js");
 const { colorCode, executor } = require("../../funcs.js");
 
-let embed;
 
 module.exports = {
   aliases: ["a", "av", "icon", "pfp", "usericon"],
@@ -9,6 +8,8 @@ module.exports = {
   name: "avatar",
   usage: "(user)",
   run: async (client, msg, args) => {
+    let embed;
+
     let user = args[0]
       ? await client.users
         .fetch(args[0].replace(new RegExp(/\W/, "g"), ""))

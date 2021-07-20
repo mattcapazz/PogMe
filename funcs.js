@@ -69,6 +69,6 @@ module.exports = {
       newMsg.delete({
         timeout: time,
       });
-    });
+    }).catch(err => console.log(err))
   },
 };

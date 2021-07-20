@@ -110,6 +110,8 @@ function getCMD(client, msg, input) {
 
   if (!cmd) return getAll(client, msg);
 
+  console.log(cmd);
+
   const embed = new MessageEmbed()
     .setColor(colorCode(msg))
     .setTitle(`${client.user.username} ${cmd.name}`);
@@ -117,7 +119,7 @@ function getCMD(client, msg, input) {
   let getAlias, getDesc, getUsage;
 
   cmd.aliases
-    ? (getAlias = `** Aliases **: * ${commaListsOr`${cmd.aliases}`}*\n\n`)
+    ? (getAlias = `** Aliases **: *${commaListsOr`${cmd.aliases}`}*\n\n`)
     : (getAlias = "");
   cmd.usage ? (getUsage = `${cmd.name} ${cmd.usage} `) : (getUsage = cmd.name);
   cmd.desc ? (getDesc = cmd.desc + "\n\n") : (getDesc = "");

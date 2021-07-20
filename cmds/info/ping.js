@@ -18,7 +18,6 @@ module.exports = {
   name: "ping",
   run: async (client, msg) => {
     const diffP = ["Pang", "Peng", "Ping", "Pong", "Pung"];
-    const rand = diffP[(Math.random() * diffP.length) | 0];
     const embed = new MessageEmbed()
       .addField("Client Ping", `Pinging...`)
       .addField("DiscordAPI", `Pinging...`)
@@ -31,7 +30,6 @@ module.exports = {
       embed: embed,
     });
     embed.fields = [];
-    // I didn't use ${} here because + characters
     embed.addField(
       "Client Ping",
       "```" + (m.createdTimestamp - msg.createdTimestamp) + " ms```",
@@ -39,7 +37,7 @@ module.exports = {
     );
     embed.addField("DiscordAPI", "```" + client.ws.ping + " ms```", true);
     return m.edit({
-      content: `🏓 **${rand}**!`,
+      content: `🏓 **${diffP[(Math.random() * diffP.length) | 0]}**!`,
       embed: embed,
     });
   },
