@@ -1,7 +1,6 @@
 const { MessageEmbed } = require("discord.js");
 const { colorCode, executor } = require("../../funcs.js");
 
-
 module.exports = {
   aliases: ["a", "av", "icon", "pfp", "usericon"],
   desc: `Get any user's avatar. If they're not in the server, you can tag them or use their user ID.`,

@@ -1,5 +1,5 @@
 {
-  "aliases": ["auto", "automatic"],
+  "aliases": ["auto", "automatic", "automation"],
   "name": ":robot: Automation",
   "desc": "Do things automatically, like auto roles and welcome messages."
 }

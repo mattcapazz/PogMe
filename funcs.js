@@ -11,14 +11,23 @@ module.exports = {
     return color;
   },
 
+  createUser: function (id) {
+    const db = require("./index").db;
+    db.get(`SELECT COUNT() AS count FROM user WHERE id = ?`, id, (err, row) => {
+      if (row.count == 0) db.run(`INSERT INTO user(id) VALUES (?)`, id);
+    });
+  },
+
   createGuild: function (id) {
     /* The server doesn't exist in the database. May be due because the bot was added to a server while offline
     Func. happens when bot enters a new server too */
     const db = require("./index").db;
-    db.get(`SELECT COUNT() AS count FROM server WHERE id = ?`, id, (err, row) => {
-      if (row.count == 0)
-        db.run(`INSERT INTO server(id) VALUES (?)`, id);
-    }
+    db.get(
+      `SELECT COUNT() AS count FROM server WHERE id = ?`,
+      id,
+      (err, row) => {
+        if (row.count == 0) db.run(`INSERT INTO server(id) VALUES (?)`, id);
+      }
     );
   },
 
@@ -62,13 +71,16 @@ module.exports = {
 
   msgDelete: function (msg, text, time) {
     if (!time) time = 8000;
-    msg.channel.send(text).then((newMsg) => {
-      msg.delete({
-        timeout: time,
-      });
-      newMsg.delete({
-        timeout: time,
-      });
-    }).catch(err => console.log(err))
+    msg.channel
+      .send(text)
+      .then((newMsg) => {
+        msg.delete({
+          timeout: time,
+        });
+        newMsg.delete({
+          timeout: time,
+        });
+      })
+      .catch((err) => console.log(err));
   },
 };
