@@ -15,7 +15,6 @@ const { readdirSync } = require("fs");
  * Global vars
  */
 client.aliases = new Discord.Collection();
-
 /**
  * catg. Name,
  * .cfg File,
@@ -23,9 +22,7 @@ client.aliases = new Discord.Collection();
  */
 (client.categories = readdirSync("./cmds/")), [], [];
 client.cmds = new Discord.Collection();
-
 client.hex = "ABCDEF0123456789";
-
 client.prefixes = [
   "pog ",
   "p! ",

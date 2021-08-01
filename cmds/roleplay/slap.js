@@ -5,12 +5,12 @@ const { colorCode, createUser } = require("../../funcs.js");
 module.exports = {
   aliases: ["punch"],
   desc: `Slap someone in the face.`,
-  name: "punch",
+  name: "slap",
   usage: "(user)",
   run: async (client, msg, args) => {
     createUser(msg.member.id); // Create user
 
-    const { body } = await superagent.get("https://nekos.life/api/slap");
+    const { body } = await superagent.get("https://nekos.life/api/v2/img/slap");
     let embed = new MessageEmbed()
       .setColor(colorCode(msg))
       .setImage(body.url)

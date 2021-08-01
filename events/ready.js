@@ -4,7 +4,7 @@ module.exports = (client) => {
 
   let prefix = client.prefixes[2].replace(" ", ""),
     arrStatus = [
-      `${prefix}help | pogme.xyz | v0.2.4`,
+      `${prefix}help | pogme.xyz | v0.2.9`,
       `${client.cmds.size - 8} commands & ${client.aliases.size} aliases!`,
       `${client.guilds.cache.size} servers and ${client.users.cache.size} users | "${prefix}invite"`,
     ],
@@ -25,4 +25,29 @@ module.exports = (client) => {
 
     i == arrStatus.length - 1 ? (i = 0) : i++;
   }, 30000);
+
+  const db = require("../index").db;
+  setInterval(function () {
+    db.all(
+      "SELECT * FROM serverUser WHERE dcTime != 0 AND dcTime < ?",
+      (+new Date() / 1e3) | 0,
+      (err, rows) => {
+        rows.forEach((row) => {
+          console.log(
+            client.guilds.cache.get(row.idServer).members.cache.get(row.idUser)
+          );
+
+          client.guilds.cache
+            .get(row.idServer)
+            .members.cache.get(row.idUser)
+            .voice.kick();
+
+          db.run(
+            "UPDATE serverUser SET dcTime = 0 WHERE idServer = ? AND idUser = ?",
+            [row.idServer, row.idUser]
+          );
+        });
+      }
+    );
+  }, 1000);
 };

@@ -12,9 +12,38 @@ module.exports = {
   },
 
   createUser: function (id) {
-    const db = require("./index").db;
-    db.get(`SELECT COUNT() AS count FROM user WHERE id = ?`, id, (err, row) => {
-      if (row.count == 0) db.run(`INSERT INTO user(id) VALUES (?)`, id);
+    return new Promise((res) => {
+      setTimeout(() => {
+        const db = require("./index").db;
+        db.get(
+          `SELECT COUNT() AS count FROM user WHERE id = ?`,
+          id,
+          (err, row) => {
+            if (row.count == 0) db.run(`INSERT INTO user(id) VALUES (?)`, id);
+            res("Resolved!");
+          }
+        );
+      });
+    });
+  },
+
+  createServerUser: function (idServer, idUser) {
+    return new Promise((res) => {
+      setTimeout(() => {
+        const db = require("./index").db;
+        db.get(
+          `SELECT COUNT() AS count FROM serverUser WHERE idServer = ? AND idUser = ?`,
+          [idServer, idUser],
+          (err, row) => {
+            if (!row.count)
+              db.run(`INSERT INTO serverUser(idServer, idUser) VALUES (?, ?)`, [
+                idServer,
+                idUser,
+              ]);
+            res("Resolved!");
+          }
+        );
+      });
     });
   },
 

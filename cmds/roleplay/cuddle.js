@@ -10,7 +10,7 @@ module.exports = {
   run: async (client, msg, args) => {
     createUser(msg.member.id); // Create user
 
-    const { body } = await superagent.get("https://nekos.life/api/cuddle");
+    const { body } = await superagent.get("https://nekos.life/api/v2/img/cuddle");
     let embed = new MessageEmbed()
       .setColor(colorCode(msg))
       .setImage(body.url)

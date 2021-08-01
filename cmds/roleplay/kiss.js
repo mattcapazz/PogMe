@@ -5,7 +5,7 @@ const { colorCode, createUser } = require("../../funcs.js");
 module.exports = {
   aliases: ["smooch"],
   desc: `Give someone a big smooch on the lips.`,
-  name: "smooch",
+  name: "kiss",
   usage: "(user)",
   run: async (client, msg, args) => {
     createUser(msg.member.id); // Create user

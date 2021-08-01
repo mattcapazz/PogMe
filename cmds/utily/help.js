@@ -50,8 +50,7 @@ function getAll(client, msg, args) {
     "\n\nFor arguments in commands:\n" +
     "`[]` means it's required\n" +
     "`()` indicates it's optional\n" +
-    "`{}` implies that it's either required or not based on the usage\n" +
-    "**Don't include the `[]`, `()` & `{}` symbols in the command!**\n\u200b";
+    "**Don't include the `[]` & `()` symbols in the command!**\n\u200b";
 
   embed.setDescription(desc);
 
@@ -71,7 +70,8 @@ function getAll(client, msg, args) {
   if (msg.channel.type == "text")
     msgDelete(
       msg,
-      `**Gotcha** ${msg.author
+      `**Gotcha** ${
+        msg.author
       }! I've sent you a DM with my commands n' stuff. Please check your DMs! ${emoji(
         "senkoHappy"
       )}`
@@ -87,7 +87,10 @@ function getCatg(client, msg, catg) {
 
   for (let i = 0; i < catg[2].length; i++) {
     let cmd = catg[2][i].slice(0, -3);
-    embed.addField(`${client.prefixes[0]}${cmd}`, client.cmds.get(cmd).desc || "-");
+    embed.addField(
+      `${client.prefixes[0]}${cmd}`,
+      client.cmds.get(cmd).desc || "-"
+    );
   }
 
   return msg.channel.send(embed);
@@ -100,8 +103,9 @@ function getCMD(client, msg, input) {
       let alias = client.categories[i][1].aliases;
       if (alias)
         for (let j = 0; j < alias.length; j++)
-          if (input.toLowerCase() == alias[j]) return getCatg(client, msg, client.categories[i]);
-    } catch { }
+          if (input.toLowerCase() == alias[j])
+            return getCatg(client, msg, client.categories[i]);
+    } catch {}
   }
 
   const cmd =
