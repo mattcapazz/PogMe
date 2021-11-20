@@ -1,0 +1,53 @@
+const { MessageEmbed } = require("discord.js");
+const { colorCode } = require("../../funcs.js");
+const translate = require("@k3rn31p4nic/google-translate-api");
+
+module.exports = {
+  desc:
+    "Translate words or sentences of different languages **to English**.\n" +
+    "Using **Google Translate API**, thus translations might not be accurate.",
+  name: "translate",
+  usage: "[text]",
+  run: async (client, msg, args) => {
+    translate(args.join(" "), {
+      to: "en",
+    })
+      .then((res) => {
+        flag = res.from.language.iso;
+        if (flag !== "en") {
+          if (flag == "zh-CN") flag = "cn";
+          else if (flag == "cs") flag = "cz";
+          else if (flag == "ca") flag = "es";
+          else if (flag == "ja") flag = "jp";
+          else if (flag == "fa") flag = "eg";
+          if (flag)
+            if (res.from)
+              embed = new MessageEmbed()
+                .setAuthor(msg.author.tag, msg.author.avatarURL())
+                .setColor(colorCode(msg))
+                .setDescription(
+                  `:flag_${flag}:: ${args.slice(0).join(" ")}\n:flag_us:: ${
+                    res.text
+                  }`
+                )
+                .setFooter(
+                  "Translations aren't 100% accurate!",
+                  "https://i.imgur.com/hocN8xq.png"
+                );
+          return msg.channel.send(embed);
+        } else {
+          let embed = new MessageEmbed()
+            .setColor(colorCode(msg))
+            .setDescription(":x: The input text is already in English!");
+          return msg.channel.send(embed).then((msg) =>
+            msg.delete({
+              timeout: 5000,
+            })
+          );
+        }
+      })
+      .catch((err) => {
+        return console.error(err);
+      });
+  },
+};

@@ -1,0 +1,10 @@
+const { MessageEmbed, Permissions } = require("discord.js");
+const { colorCode, createGuild } = require("../../funcs.js");
+
+module.exports = {
+  aliases: ["halloween bag"],
+  name: "halloween inventory",
+  run: async (client, msg, args) => {
+
+  },
+};

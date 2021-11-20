@@ -13,11 +13,7 @@ module.exports = (client) => {
       } catch {}
     };
 
-    client.categories[idx] = [
-      cat,
-      evalFile(`./cmds/${cat}/cfg.json`),
-      dir,
-    ];
+    client.categories[idx] = [cat, evalFile(`./cmds/${cat}/cfg.json`), dir];
 
     for (let file of dir) {
       let cmd = require(`./cmds/${cat}/${file}`);

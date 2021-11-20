@@ -1,0 +1,39 @@
+const { MessageEmbed, Permissions } = require("discord.js");
+const { colorCode, createGuild } = require("../../funcs.js");
+
+module.exports = {
+  aliases: ["halloween channel", "h enable", "h channel"],
+  desc: "Allows PogMe to spawn trick-or-treaters in the channel you selected.",
+  name: "halloween enable",
+  run: async (client, msg, args) => {
+    if (
+      msg.guild.members.cache
+        .get(msg.author.id)
+        .permissions.has(Permissions.FLAGS.ADMINISTRATOR)
+    ) {
+      try {
+        let channel = args[1].replaceAll(/\D+/g, "");
+        if (msg.guild.channels.cache.has(channel)) {
+          let embed = new MessageEmbed()
+            .setColor(colorCode(msg))
+            .setTitle("Halloween enabled!!1 🎃")
+            .setDescription(
+              `<#${channel}> will now be used for spawning **trick-or-treaters**!`
+            );
+
+          const db = require("../../index").db;
+          let id = msg.guild.id;
+          createGuild(id);
+          db.run(
+            `UPDATE server SET halloweenChannel = ? WHERE id = ?`,
+            channel,
+            id
+          );
+          return msg.channel.send({ embeds: [embed] });
+        } else return msg.channel.send("`ERR_INVALIDCHANNEL`");
+      } catch {
+        return msg.channel.send("`ERR_NONCHANNEL`");
+      }
+    } else return msg.channel.send("Error: No perms! :<<");
+  },
+};

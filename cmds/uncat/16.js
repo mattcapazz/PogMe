@@ -1,12 +1,11 @@
 const { MessageActionRow, MessageButton } = require("discord.js");
 
 module.exports = {
-  aliases: ["two"],
-  desc: `two.`,
-  name: "2",
+  desc: `icey number`,
+  name: "16",
   run: async (client, msg) => {
     const row = new MessageActionRow().addComponents(
-      new MessageButton().setStyle("PRIMARY").setLabel("2").setCustomId("yes")
+      new MessageButton().setStyle("SUCCESS").setLabel("16").setCustomId("yes")
     );
 
     return msg.channel.send({ content: "_ _", components: [row] });

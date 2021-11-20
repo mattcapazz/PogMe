@@ -1,0 +1,52 @@
+/*
+Trick'cord Treat Command List
+Trick-or-treaters will appear and you'll have the chance to greet them. Use the right command and they'll leave you something for your kindness. Collect everything and become your server's Champion of Halloween!
+
+First, determine which channels the trick-or-treaters can spawn in by using h!config enable #channel
+
+Learn more about the bot on our blog: https://dis.gd/trickcordtreat
+Game
+h!trick
+h!treat
+h!inventory
+Statistics
+h!leaderboard
+Help
+h!help
+h!support
+h!invite
+Configurations
+h!config enable #channel - enable the bot to spawn trick-or-treaters in this channel
+h!config disable #channel - disable spawns in this channel
+h!config role - if you do not see the Champion of Halloween role, please use this command to regenerate the role
+*/
+
+const { MessageActionRow, MessageEmbed, MessageButton } = require("discord.js");
+const { colorCode } = require("../../funcs.js");
+
+module.exports = {
+  aliases: ["h help", "help halloween"],
+  name: "halloween help",
+  run: async (client, msg) => {
+    const role = "**The Spookiest️️️️™️**"
+
+    const row = new MessageActionRow()
+      .addComponents(
+        new MessageButton()
+          .setLabel("PogMe's Support Server")
+          .setURL("https://discord.gg/vKWe7ymUJq")
+          .setStyle('LINK')
+      );
+
+    const embed = new MessageEmbed()
+      .setTitle("PogMe's :jack_o_lantern: Halloween Commands")
+      .setColor(colorCode(msg))
+      .setDescription(`Spooky monsters will appear and you'll have the chance to greet them. Open the right door and they'll leave you something for your kindness. Collect every possible item and become ${role} of **${msg.guild.name}**!\n\nFirst, determine which channel spoOooky monsters should spawn in by using:\n\`p!h enable #channel\`.\n\nFound an issue? Report it @ **PogMe's Support Server** :ghost:`)
+      .addField("Config", `\`p!h enable #channel\`~ Allow me to summon spoopy monsters in the specified channel.\n\`p!h disable\` ~ Prevents me to spawn trick-or-treaters.\n\`p!h role\` ~ If you do not see ${role} role, please use this command to regenerate it.`, false)
+      .addField("Game", "`SOON`: `p!h inventory` ~ I'll give you a list of all the items you've gathered so far.", false)
+      .addField("Help", "`p!h support` ~ Shares an invite link to my support server.\n`p!h invite` ~ Shares my invite link, so you and others can add me to your servers.", false)
+      .addField("Statistics", "`p!h leaderboard` ~ Displays the scores of how your server members are performing.", false)
+      .setFooter("Massive special thanks to Serene#5799 for all the insanely cool drawings! Without her, any of this wouldn't be possible. Make sure to send her some ️❤", "https://cdn.discordapp.com/avatars/401148293977079818/678ecd6fe47c8a23f451667035d84603.webp?size=256")
+    return msg.channel.send({ embeds: [embed], components: [row] });
+  },
+};

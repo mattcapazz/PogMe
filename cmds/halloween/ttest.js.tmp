@@ -1,0 +1,73 @@
+const { colorCode } = require("../../funcs.js");
+const {
+  MessageAttachment,
+  MessageEmbed,
+  MessageActionRow,
+  MessageButton,
+} = require("discord.js");
+
+const matrix = {
+  1: ["*Insane* Icey", "Poisonous Beer", "Bloody Skirt", "Ice Shard", "897863792766103572"],
+  2: ["*Spooky* Sand", "Crimson Grain of Sand", "Huge Honker", "Disturbing Meme", "897863872218796082"],
+  3: ["*Terrible* Trash", "Rotten Banana Peel", "Shrivelled Limb", "Xbox", "897863911875960892"],
+  4: ["Matt *the Maniac*", "Bloody Scarf", "Killer Knife", "*Matt’s* Sanity", "897863955052134540"],
+  5: ["Ghost Cube", "Frozen Fabric", "Bony Arm", "Lucas", "897863995338399744"],
+  6: ["A Harmless Spider *(lie)*", "Bloody Web", "Spider Fang", "Mint Oreo", "897864055560220732"],
+  7: ["Tentable Qub", "*Sus*picious Portion of Nothing", "Uncommon Nothing", "Small Gooey Rubix Cube *(ew)*", "897864092201664512"],
+  8: ["ŒXîł", "Eye Orb", "Claw of *ŒXîł*", "Mysterious Goo", "897864150271815730"],
+  9: ["Sickly Feline", "Bent Whisker", "Strange Acid", "Toxic Paw", "897864193728970812"],
+  10: ["Sea Crawler", "Tentacle", "Rotten Crab", "Blood Ink", "897864229942591558"],
+  11: ["Handsome Raven", "*Raven’s* Eye", "Bloody Beak", "Essence of Death", "897864262125514802"],
+  12: ["Chare *the Butter Knife Holder*", "Butter Knife", "Spoopy SOUL", "Chocolate Crumb", "897926644684165170"],
+  13: ["Shadow the Donut Thrower", "Hedgehog Quil", "Donut", "Light Speed", "897926730168291338"]
+};
+
+module.exports = {
+  desc: "yes sirrrrrr",
+  name: "ttest",
+  run: async (client, msg) => {
+    let monster,
+      itemProb,
+      door,
+      row = new MessageActionRow();
+
+    //console.log(matrix)
+
+    // * 6 ~ Being the total of monsters pics
+    monster = Math.floor(Math.random() * 13 + 1);
+    let mm = matrix[monster];
+    itemProb = Math.random();
+    door = Math.floor(Math.random() * 5 + 0);
+
+    /*msg.channel.send(
+      `monster: ${monster}, itemProb: ${itemProb}, door: ${door}`
+    );*/
+    msg.channel.send({ content: `\`DEBUG\`: Correct door: ${rnd + 1}, Item Probability: ${itemProb}` });
+    // rnd ~ Being the correct door number and
+    // for() ~ Generate 5 door buttons
+    for (i = 0; i < 5; i++) {
+      let btn = new MessageButton().setStyle("SECONDARY").setEmoji("🚪");
+      if (i == door) {
+        //console.log(monster, monster-1, monster - 1 * 3)
+        if (itemProb <= 0.15)
+          btn.setCustomId(`spoopy:${mm[3]}-${mm[0]};3=${(monster - 1) * 3 + 3}`);
+        else if (itemProb <= 0.45)
+          btn.setCustomId(`spoopy:${mm[2]}-${mm[0]};2=${(monster - 1) * 3 + 2}`);
+        else
+          btn.setCustomId(`spoopy:${mm[1]}-${mm[0]};1=${(monster - 1) * 3 + 1}`);
+      } else btn.setCustomId(`spoopy:${i}`);
+      row.addComponents(btn);
+    }
+
+    const embed = new MessageEmbed()
+      .setColor(colorCode(msg))
+      .setTitle("A trick-or-treater has stopped by!")
+      .setDescription("Open the correct door and greet them")
+      .setImage(`https://cdn.discordapp.com/attachments/858400861990158376/${mm[4]}/spoopyMonster.png`);
+
+    return msg.channel.send({
+      embeds: [embed],
+      components: [row],
+    });
+  },
+};

@@ -4,8 +4,8 @@ module.exports = (client) => {
 
   let prefix = client.prefixes[2].replace(" ", ""),
     arrStatus = [
-      `${prefix}help | pogme.xyz | v0.2.9`,
-      `${client.cmds.size - 8} commands & ${client.aliases.size} aliases!`,
+      `${prefix}help | pogme.xyz | v0.3.6`,
+      `${client.cmds.size - 7} commands & ${client.aliases.size} aliases!`,
       `${client.guilds.cache.size} servers and ${client.users.cache.size} users | "${prefix}invite"`,
     ],
     i = 1;
@@ -33,14 +33,10 @@ module.exports = (client) => {
       (+new Date() / 1e3) | 0,
       (err, rows) => {
         rows.forEach((row) => {
-          console.log(
-            client.guilds.cache.get(row.idServer).members.cache.get(row.idUser)
-          );
-
           client.guilds.cache
             .get(row.idServer)
             .members.cache.get(row.idUser)
-            .voice.kick();
+            .voice.disconnect();
 
           db.run(
             "UPDATE serverUser SET dcTime = 0 WHERE idServer = ? AND idUser = ?",

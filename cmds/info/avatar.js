@@ -11,12 +11,12 @@ module.exports = {
 
     let user = args[0]
       ? await client.users
-        .fetch(args[0].replace(new RegExp(/\W/, "g"), ""))
-        .catch(() =>
-          msg.channel.send(
-            `Unknown User, I couldn't find any user by name or ID ${args[0]}. Maybe try again in a different way.`
+          .fetch(args[0].replace(new RegExp(/\W/, "g"), ""))
+          .catch(() =>
+            msg.channel.send(
+              `Unknown User, I couldn't find any user by name or ID ${args[0]}. Maybe try again in a different way.`
+            )
           )
-        )
       : msg.author;
     if (user.tag) {
       //If it's a user
@@ -29,8 +29,8 @@ module.exports = {
             format: "jpg",
             size: 2048,
           })}) | ` +
-          `[PNG](${user.avatarURL({ format: "png", size: 2048 })}) | ` +
-          `[WEBP](${user.avatarURL({ format: "webp", size: 2048 })})`
+            `[PNG](${user.avatarURL({ format: "png", size: 2048 })}) | ` +
+            `[WEBP](${user.avatarURL({ format: "webp", size: 2048 })})`
         )
         .setFooter(exec[0], exec[1])
         .setImage(
@@ -62,7 +62,7 @@ module.exports = {
         );
       }
 
-      return msg.channel.send(embed);
+      return msg.channel.send({ embeds: [embed] });
     }
   },
 };

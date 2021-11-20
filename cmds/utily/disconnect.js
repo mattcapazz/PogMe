@@ -19,11 +19,6 @@ module.exports = {
 
           let secs = args[1];
           if (isNaN(args[1])) secs = ms(args[1], { long: true }) / 1000;
-          //msg.channel.send(`**Time**: ${secs}`);
-          //msg.channel.send(`**Current UNIX**: ${(+new Date() / 1e3) | 0}`);
-          /*msg.channel.send(
-            `**UNIX + ${secs}s**: ${Number(((+new Date() / 1e3) | 0) + secs)}`
-          );*/
 
           const db = require("../../index").db;
           createServerUser(idServer, idUser).then(() => {

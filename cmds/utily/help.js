@@ -1,6 +1,6 @@
 const { colorCode, emoji, msgDelete } = require("../../funcs.js");
 const { commaListsOr } = require("common-tags");
-const { MessageEmbed } = require("discord.js");
+const { MessageEmbed, Permissions } = require("discord.js");
 
 let prefix;
 
@@ -38,7 +38,10 @@ function getAll(client, msg, args) {
 
   desc = `To check out a command or a section type \`${prefix} help [command/section]\`.`;
 
-  if (msg.channel.type == "dm" || msg.member.hasPermission("MANAGE_MESSAGES"))
+  if (
+    msg.channel.type == "dm" ||
+    msg.member.permissions.has(Permissions.MANAGE_MESSAGES)
+  )
     desc +=
       `\nIf you want this command to show up in server chat instead of DMs add **-p** at the end of the command.` +
       `\n**Example**: \`${prefix.replace(
@@ -66,7 +69,7 @@ function getAll(client, msg, args) {
       );
     }
 
-  if (args) return msg.channel.send(embed);
+  if (args) return msg.channel.send({ embeds: [embed] });
   if (msg.channel.type == "text")
     msgDelete(
       msg,
@@ -76,7 +79,7 @@ function getAll(client, msg, args) {
         "senkoHappy"
       )}`
     );
-  return msg.author.send(embed);
+  return msg.channel.send({ embeds: [embed] });
 }
 
 function getCatg(client, msg, catg) {
@@ -93,7 +96,7 @@ function getCatg(client, msg, catg) {
     );
   }
 
-  return msg.channel.send(embed);
+  return msg.channel.send({ embeds: [embed] });
 }
 
 function getCMD(client, msg, input) {
@@ -132,5 +135,5 @@ function getCMD(client, msg, input) {
     `${getAlias} ${getDesc} ` + ` ** Usage **: \`${prefix} ${getUsage}\``
   );
 
-  return msg.channel.send(embed);
+  return msg.channel.send({ embeds: [embed] });
 }

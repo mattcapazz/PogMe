@@ -1,5 +1,5 @@
 const axios = require("axios").default;
-const config = require("../../config.json");
+require("dotenv").config();
 
 const { MessageEmbed } = require("discord.js");
 const { colorCode } = require("../../funcs.js");
@@ -15,7 +15,7 @@ module.exports = {
       url: "https://mashape-community-urban-dictionary.p.rapidapi.com/define",
       params: { term: args.join(" ") },
       headers: {
-        "x-rapidapi-key": config["x-rapidapi-key"],
+        "x-rapidapi-key": process.env.X_RAPIDAPI_KEY,
         "x-rapidapi-host": "mashape-community-urban-dictionary.p.rapidapi.com",
       },
     };
@@ -35,18 +35,23 @@ module.exports = {
           )
           .addField(
             "Example",
-            `${word.example.replace(/[\[\]']+/g, "")}\n\n*(Defined by: **${word.author
+            `${word.example.replace(/[\[\]']+/g, "")}\n\n*(Defined by: **${
+              word.author
             }**)*`
           )
-          .addField(":thumbsup: Thumbs up", word.thumbs_up, true)
-          .addField(":thumbsdown: Thumbs down", word.thumbs_down, true)
+          .addField(":thumbsup: Thumbs up", word.thumbs_up.toString(), true)
+          .addField(
+            ":thumbsdown: Thumbs down",
+            word.thumbs_down.toString(),
+            true
+          )
           .addField(
             ":calendar_spiral: Written on",
-            String(word.written_on).split("T")[0],
+            String(word.written_on).split("T")[0].toString(),
             true
           );
 
-        return msg.reply(embed);
+        return msg.channel.send({ embeds: [embed] });
       })
       .catch(function (error) {
         return msg.reply("no");

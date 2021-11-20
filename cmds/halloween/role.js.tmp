@@ -1,0 +1,41 @@
+const { NodeCanvasRenderingContext2D } = require("canvas");
+const { MessageEmbed, Permissions } = require("discord.js");
+const { colorCode, createGuild } = require("../../funcs.js");
+
+module.exports = {
+  aliases: ["h role"],
+  name: "halloween role",
+  run: async (client, msg) => {
+    if (
+      msg.guild.members.cache
+        .get(msg.author.id)
+        .permissions.has(Permissions.FLAGS.ADMINISTRATOR)
+    ) {
+      const role = msg.guild.roles.cache.find((role) => role.name === client.user.username);
+      msg.guild.roles.create({
+        name: "The Spookiest™",
+        color: "ORANGE",
+        hoist: true,
+        position: role.rawPosition - 2,
+      })
+        .then(r => {
+          console.log(r)
+          let embed = new MessageEmbed()
+            .setColor(colorCode(msg))
+            .setTitle("swag title")
+            .setDescription(
+              `role created*`
+            )
+
+          const db = require("../../index").db;
+          let id = msg.guild.id;
+          createGuild(id);
+          db.run(`UPDATE server SET halloweenRole = ? WHERE id = ?`, r.id, id);
+
+          return msg.channel.send({ embeds: [embed] });
+        })
+        .catch(console.error);  
+
+    } else return msg.channel.send("No perms! :<<");
+  },
+};

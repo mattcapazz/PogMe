@@ -1,15 +1,17 @@
 const { ShardingManager } = require("discord.js");
-const config = require("./config.json");
+require("dotenv").config();
 
 const shards = new ShardingManager("./index.js", {
-  token: config.token,
+  token: process.env.token,
   totalShards: "auto",
   respawn: true,
 });
 
 shards.on("shardCreate", (shard) => {
   console.log(
-    `[${new Date().toString().split(" ", 5).join(" ")}] Launched shard #${shard.id}`
+    `[${new Date().toString().split(" ", 5).join(" ")}] Launched shard #${
+      shard.id
+    }`
   );
 });
 

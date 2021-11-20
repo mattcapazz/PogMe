@@ -1,0 +1,94 @@
+const { MessageEmbed, Permissions } = require("discord.js");
+
+module.exports = {
+  aliases: ["serverinfo", "server_info", "server"],
+  description: "Returns information about the server",
+  name: "server-info",
+  usage: "server-info",
+  run: async (client, msg) => {
+    if (msg.member.permissions.has(Permissions.USE_VAD)) {
+      let textChannels = 0,
+        voiceChannels = 0,
+        categories = 0;
+      msg.channel.guild.channels.cache.filter((c) => {
+        if (c.type == "text") textChannels += 1;
+        if (c.type == "voice") voiceChannels += 1;
+        if (c.type == "category") categories += 1;
+      });
+      if (!msg.channel.guild.premiumSubscriptionCount) subCount = 0;
+      else subCount = msg.channel.guild.premiumSubscriptionCount;
+      if (msg.channel.guild.features.length == 3)
+        features = "Splash, Banner,\nAnimated server\nicon";
+      if (msg.channel.guild.features.length == 2)
+        features = "Splash, Animated server\nicon";
+      else features = "None";
+      let day = msg.channel.guild.createdAt.getDate(),
+        month = msg.channel.guild.createdAt.getMonth() + 1;
+      if (day < 10) day = "0" + msg.channel.guild.createdAt.getDate();
+      if (month < 10)
+        month = "0" + (msg.channel.guild.createdAt.getMonth() + 1);
+      console.log(msg.channel.guild.members.cache.get());
+      embed = new MessageEmbed()
+        .setColor("#353535")
+        //I think I can simply get msg.guild.ownerID here but aight, in fact everything that is msg.channel could be msg.guild, 85% sure
+        .addField(
+          "Owner",
+          msg.channel.guild.members.cache.get(msg.channel.guild.ownerID).user
+            .tag,
+          true
+        )
+        .addField("VIP Perks", features, true)
+        //Convert below into a func
+        .addField(
+          "Server Created",
+          `Created ${day}/${month}/${msg.channel.guild.createdAt.getFullYear()}`,
+          true
+        )
+        .addField("Total Roles", msg.channel.guild.roles.cache.size, true)
+        .addField(
+          "Members",
+          msg.channel.guild.memberCount +
+            " members,\n" +
+            msg.channel.guild.members.cache.filter(
+              (member) => member.presence.status !== "offline"
+            ).size +
+            " online\n" +
+            msg.channel.guild.members.cache.filter((member) => member.user.bot)
+              .size +
+            " bots, " +
+            msg.channel.guild.members.cache.filter((member) => !member.user.bot)
+              .size +
+            " humans",
+          true
+        )
+        .addField(
+          "Total Channels",
+          textChannels +
+            voiceChannels +
+            categories +
+            " total channels: \n" +
+            categories +
+            " categories\n" +
+            textChannels +
+            " text, " +
+            voiceChannels +
+            " voice",
+          true
+        )
+        .addField("Boost level", msg.channel.guild.premiumTier, true)
+        .addField("Number of Boosts", subCount, true)
+        //There's a super easier way to get this instead of this monstruosity
+        .setThumbnail(
+          "https://cdn.discordapp.com/icons/" +
+            msg.channel.guild.id +
+            "/" +
+            msg.channel.guild.icon +
+            ".webp?size=1024"
+        )
+        .setFooter(
+          `Server name: ${msg.channel.guild.name} | ServerID: ${msg.channel.guild.id}`
+        );
+      //return msg.channel.send(embed);
+    }
+  },
+};

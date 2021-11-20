@@ -1,0 +1,33 @@
+const { MessageEmbed, Permissions } = require("discord.js");
+const { colorCode, createGuild } = require("../../funcs.js");
+
+module.exports = {
+  aliases: ["h disable"],
+  desc: "Disallow PogMe to spawn trick-or-treaters in the channel you selected.",
+  name: "halloween disable",
+  run: async (client, msg) => {
+    if (
+      msg.guild.members.cache
+        .get(msg.author.id)
+        .permissions.has(Permissions.FLAGS.ADMINISTRATOR)
+    ) {
+      let embed = new MessageEmbed()
+        .setColor(colorCode(msg))
+        .setTitle("Halloween disabled. 😔:headstone:")
+        .setDescription(
+          `I stopped spawning **trick-or-treaters**. It's a sad spoopy day for **${msg.guild.name}**.
+        Rest in peace, spookiest and swag monsters. Y'all going to be missed. 😭\n
+        *I hope this is temporary and that you re-enable Halloween back. Why would you kill it like that? 💀\n
+        Sincerely from,
+        - Maybe a Halloween enjoyer*`
+        );  
+
+      const db = require("../../index").db;
+      let id = msg.guild.id;
+      createGuild(id);
+      db.run(`UPDATE server SET halloweenChannel = null WHERE id = ?`, id);
+
+      return msg.channel.send({ embeds: [embed] });
+    } else return msg.channel.send("No perms! :<<");
+  },
+};

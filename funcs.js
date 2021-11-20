@@ -1,14 +1,18 @@
-const config = require("./config.json");
+require("dotenv").config();
 
 module.exports = {
   colorCode: function (msg) {
     // @TOFIX: Instead of retrieving the whole `msg` arg., get displayHexColor only
-    let color =
-      msg.channel.type == "dm"
-        ? config.embedDefaultColor
-        : msg.guild.me.displayHexColor;
-    if (color == "#000000") color = "#2F3136";
-    return color;
+    try {
+      let color =
+        msg.channel.type == "dm"
+          ? process.env.embed_default_color
+          : msg.guild.me.displayHexColor;
+      if (color == "#000000") color = process.env.embed_default_color;
+      return color;
+    } catch {
+      return process.env.embed_default_color;
+    }
   },
 
   createUser: function (id) {
@@ -65,13 +69,13 @@ module.exports = {
   },
 
   debug: function (log) {
-    if (config.debugMessages == "true")
+    if (process.env.debug_messages == "true")
       console.log(`[DEBUG][${require("./funcs.js").date()}]: ${log}`);
   },
 
   emoji: function (emoji) {
     const client = require("./index").client;
-    let guild = client.guilds.cache.get(config.getEmojisFromGuild);
+    let guild = client.guilds.cache.get(process.env.get_emojis_from_guild);
     if (guild) {
       let _emj;
       guild.emojis.cache.forEach((emj) => {

@@ -2,8 +2,7 @@ const { MessageEmbed } = require("discord.js");
 const { colorCode } = require("../../funcs.js");
 
 module.exports = {
-  desc:
-    "Check my ping to see if there's an issue on how long I'm taking to reply.",
+  desc: "Check my ping to see if there's an issue on how long I'm taking to reply.",
   name: "pog",
   run: async (client, msg) => {
     const arrEmojis = Array(
@@ -94,6 +93,6 @@ module.exports = {
       );
     }
 
-    return msg.channel.send(embed);
+    return msg.channel.send({ embeds: [embed] });
   },
 };
