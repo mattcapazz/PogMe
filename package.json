@@ -1,4 +1,8 @@
 {
+  "name": "pogme",
+  "version": "1.0.0",
+  "description": "![PogMe Avatar](./img/avatar.png)",
+  "main": "shard.js",
   "dependencies": {
     "axios": "^0.22.0",
     "canvas": "^2.8.0",
@@ -9,5 +13,20 @@
     "ms": "^2.1.3",
     "sqlite3": "^5.0.2",
     "superagent": "^6.1.0"
-  }
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node shard.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mattcapazz/PogMe.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mattcapazz/PogMe/issues"
+  },
+  "homepage": "https://github.com/mattcapazz/PogMe#readme"
 }
