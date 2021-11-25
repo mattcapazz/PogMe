@@ -1,6 +1,6 @@
 ![PogMe Avatar](./img/avatar.png)
 
-# PogMe &middot; 
+# PogMe
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) 
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE)
 
