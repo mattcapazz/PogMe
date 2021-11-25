@@ -70,7 +70,8 @@ function getAll(client, msg, args) {
     }
 
   if (args) return msg.channel.send({ embeds: [embed] });
-  if (msg.channel.type.toLowerCase().includes("text"))
+  if (msg.channel.type.toLowerCase().includes("text")) {
+    msg.author.send({ embeds: [embed] });
     return msgDelete(
       msg,
       `**Gotcha** ${
@@ -79,6 +80,7 @@ function getAll(client, msg, args) {
         "senkoHappy"
       )}`
     );
+  }
   return msg.channel.send({ embeds: [embed] });
 }
 
