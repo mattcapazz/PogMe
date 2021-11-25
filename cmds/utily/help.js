@@ -39,8 +39,8 @@ function getAll(client, msg, args) {
   desc = `To check out a command or a section type \`${prefix} help [command/section]\`.`;
 
   if (
-    msg.channel.type == "dm" ||
-    msg.member.permissions.has(Permissions.MANAGE_MESSAGES)
+    msg.channel.type.toLowerCase() == "dm" ||
+    msg.member.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES)
   )
     desc +=
       `\nIf you want this command to show up in server chat instead of DMs add **-p** at the end of the command.` +
@@ -70,8 +70,8 @@ function getAll(client, msg, args) {
     }
 
   if (args) return msg.channel.send({ embeds: [embed] });
-  if (msg.channel.type == "text")
-    msgDelete(
+  if (msg.channel.type.toLowerCase().includes("text"))
+    return msgDelete(
       msg,
       `**Gotcha** ${
         msg.author

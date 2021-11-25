@@ -16,6 +16,7 @@ const client = new Discord.Client({
     "GUILD_MESSAGE_TYPING",
     "DIRECT_MESSAGES",
   ],
+  partials: ["CHANNEL"],
 });
 
 const sqlite3 = require("sqlite3").verbose();

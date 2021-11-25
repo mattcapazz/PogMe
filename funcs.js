@@ -103,17 +103,14 @@ module.exports = {
   },
 
   msgDelete: function (msg, text, time) {
-    if (!time) time = 8000;
+    if (!time) time = 8 * 1000;
+    msg.delete(); // Deletes user msg
+
     msg.channel
       .send(text)
-      .then((newMsg) => {
-        msg.delete({
-          timeout: time,
-        });
-        newMsg.delete({
-          timeout: time,
-        });
+      .then((m) => {
+        setTimeout(() => m.delete(), time);
       })
-      .catch((err) => console.log(err));
+      .catch();
   },
 };
